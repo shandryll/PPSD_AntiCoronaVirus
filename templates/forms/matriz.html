@@ -1,0 +1,82 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Matriz{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid loglife_title">
+    <form action ="#" method="post" class="form">
+      <div class="page-header">
+
+        <h2 class="form-heading">Adicionar Serviço</h2>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="motorista_id">Motorista Responsável</label>
+            <select class="form-control" id="motorista_id" name="motorista_id" required>
+              <option>123456</option>
+              <option>987654</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="responsavel_remetente">Responsável do Remetente</label>
+            <input type="text" class="form-control" id="responsavel_remetente" name="responsavel_remetente" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="endereco_remetente">Endereço do Remetente</label>
+            <input type="text" class="form-control" id="endereco_remetente" name="endereco_remetente" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="responsavel_destinatario">Responsável do Destinatário</label>
+            <input type="text" class="form-control" id="responsavel_destinatario" name="responsavel_destinatario" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="endereco_destinatario">Endereço do Destinatário</label>
+            <input type="text" class="form-control" id="endereco_destinatario" name="endereco_destinatario" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="horario_inicial_coleta">Horário Inicial da Coleta</label>
+            <input type="time" class="form-control" id="horario_inicial_coleta" name="horario_inicial_coleta" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="horario_final_coleta">Horário Final da Coleta</label>
+            <input type="time" class="form-control" id="horario_final_coleta" name="horario_final_coleta" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="horario_inicial_entrega">Horário Inicial da Entrega</label>
+            <input type="time" class="form-control" id="horario_inicial_entrega" name="horario_inicial_entrega" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="horario_final_entrega">Horário Final da Entrega</label>
+            <input type="time" class="form-control" id="horario_final_entrega" name="horario_final_entrega" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="material_servico">Materiais Utilizados no Serviço</label>
+            <select class="form-control" id="material_servico" name="material_servico" required>
+              <option>Caixa de Isopor de 3 Litros</option>
+              <option>Caixa de Isopor de 8 Litros</option>
+              <option>Embalagem Terciária de 3 Litros</option>
+              <option>Embalagem Terciária de 12 Litros</option>
+              <option>Gelox</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="submit" value="Adicionar" class="btn btn-primary btn-lg btn-block">
+
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

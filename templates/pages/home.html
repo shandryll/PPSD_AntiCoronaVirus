@@ -1,0 +1,47 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Início{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid loglife_title">
+  <div class="page-header">
+    <h1>Bem vindo ao Loglife System</h1>
+  </div>
+
+  <h2>Serviços Disponíveis:</h2>
+
+  <p class="lead">- Para a <a class="redirect_url" href="{{ url_for('matriz') }}">Matriz</a>:</p>
+  <ul>
+    <li>Registrar o responsável do remetente</li>
+    <li>Registrar o endereço do remetente</li>
+    <li>Registrar o responsável do destinatário</li>
+    <li>Registrar o endereço do destinatário</li>
+    <li>Registrar o horário da coleta</li>
+    <li>Registrar o horário da entrega</li>
+    <li>Registrar os materiais a serem levados para realizar a coleta</li>
+  </ul>
+
+  </br>
+
+  <p class="lead">- Para o <a class="redirect_url" href="{{ url_for('motorista') }}">Motorista</a>:</p>
+  <ul>
+    <li>Aceitar a solicitação do serviço</li>
+    <li>Registrar o inicio da rota da coleta</li>
+    <li>Registrar a chegada ao local da coleta</li>
+    <li>Registrar o inicio da entrega</li>
+    <li>Registrar a chegada ao local da entrega</li>
+    <li>Registrar a entrega</li>
+  </ul>
+
+  </br>
+
+  <p class="lead">- Para o <a class="redirect_url" href="{{ url_for('cliente') }}">Cliente</a>:</p>
+  <ul>
+    <li>Visualização do status do seu transporte</li>
+  </ul>
+
+  </br>
+
+</div>
+
+{% endblock %}
