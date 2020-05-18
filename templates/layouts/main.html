@@ -1,122 +1,37 @@
 <!doctype html>
+<html lang="pt">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
+    <title>{% block title %}{% endblock %}</title>
 
-  <meta charset="utf-8">
-  <title>Loglife - {% block title %}{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-  <!-- meta -->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- /meta -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Anti-Corona Vírus</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- styles -->
-  <link type="text/css" rel="stylesheet" href="/static/css/font-awesome-4.1.0.min.css" />
-  <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-3.1.1.min.css">
-  <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-theme-3.1.1.min.css" />
-  <link type="text/css" rel="stylesheet" href="/static/css/layout.main.css" />
-  <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-  <link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
-  <link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
-  <!-- /styles -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-  <!-- favicons -->
-  <link rel="shortcut icon" href="/static/ico/favicon.png">
-  <!-- /favicons -->
-
-  <!-- scripts -->
-  <script src="/static/js/libs/modernizr-2.8.2.min.js"></script>
-  <!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
-  <!-- /scripts -->
-
-</head>
-
-<body>
-
-  <!-- Wrap all page content here -->
-  <div id="wrap">
-
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Loglife System</a>
-        </div>
-
-        <div class="collapse navbar-collapse">
-
-          <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Início</a></li>
-
-            <li {% if request.endpoint == 'matriz' %} class="active" {% endif %}><a href="{{ url_for('matriz') }}">Matriz</a></li>
-
-            <li {% if request.endpoint == 'motorista' %} class="active" {% endif %}><a href="{{ url_for('motorista') }}">Motorista</a></li>
-
-            <li {% if request.endpoint == 'cliente' %} class="active" {% endif %}><a href="{{ url_for('cliente') }}">Cliente</a></li>
-          </ul>
-
-          <ul class="nav navbar-nav pull-right">
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('register') }}">Registrar</a></li>
-
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-          </ul>
-
-        </div>
+        <ul class="nav navbar-nav">
+          <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('home') }}">Início</a></li>
+          <li {% if request.endpoint == 'suprimentos' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('suprimentos') }}">Suprimentos</a></li>
+        </ul>
 
       </div>
-    </div>
+    </nav>
 
-    <!-- Begin page content -->
-    <!-- Navbar -->
-    <main id="content" role="main" class="container">
+    {% block content %}{% endblock %}
 
-      <!-- Flash Messages -->
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-block alert-error fade in">
-              <a class="close" data-dismiss="alert">&times;</a>
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-
-      {% block content %}{% endblock %}
-
-    </main>
-
-  </div>
-
-  <!-- Footer -->
-  <div id="footer">
-    <div class="container">
-      <p>Shandryll Stéphano &copy; All Rights Reserved.</p>
-      {% block footer %}{% endblock %}
-    </div>
-  </div>
-
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
-  <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
-  <script type="text/javascript" src="/static/js/plugins.js" defer></script>
-  <script type="text/javascript" src="/static/js/script.js" defer></script>
-
-  <!-- Google Analytics - Change UA-XXXXX-X to be your site's ID -->
-  <script>
-  window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-  Modernizr.load({
-    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-  });
-  </script>
-
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
 </html>
