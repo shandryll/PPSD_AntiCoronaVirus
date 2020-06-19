@@ -27,25 +27,7 @@ def home():
     if r.status_code == 200:
         reddit_data = json.loads(r.content)
 
-    """
-        Data:
-        UF/Link para Boletim:
-        Observação:
-    """
-    for boletim in reddit_data['results']:
-        print(
-            
-            "Data: ", boletim['date'],
-            "\nUF/Link para Boletim:", boletim['state'],
-            "\nObservação:", boletim['notes'], 
-            "\nLink: ", boletim['url'],
-            "\n----------------------------------",
-            "\n"
-        )
-
-    #print (reddit_data['results'])
-
-    return render_template('pages/home.html')
+    return render_template('pages/home.html', informacoes=reddit_data['results'])
 
 @app.route("/suprimentos")
 def suprimentos():
