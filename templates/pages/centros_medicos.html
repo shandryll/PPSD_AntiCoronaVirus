@@ -1,0 +1,39 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Centros de Saude{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid loglife_title">
+    <div class="page-header">
+
+      <h2>Centros de Saude</h2>
+      <p class="subtitle">Visualize serviços disponíveis.</p>
+      </br>
+
+      {% if data %}
+
+        {% for row in data %}
+          <div class="row">
+            <div class="col-md-12 column">
+              <div class="card">
+
+                <p class="card_text">Número do pedido: <span>{{ row[0] }}</span></p>
+                <p class="card_text">Nome do Remetente: <span>{{ row[1] }}</span></p>
+                <p class="card_text">Endereço do Remetente: <span>{{ row[2] }}</span></p>
+                <p class="card_text">Nome do Destinatário: <span>{{ row[3] }}</span></p>
+                <p class="card_text">Endereço do Destinatário: <span>{{ row[4] }}</span></p>
+
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      {% else %}
+      </br>
+      <p class="lead" style="text-align: center;">Sem serviços disponíveis.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
