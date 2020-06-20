@@ -1,12 +1,17 @@
 #----------------------------------------------------------------------------#
 # Imports
 #----------------------------------------------------------------------------#
+#from ..server.log import log
 import sqlite3
+
 
 #----------------------------------------------------------------------------#
 # Initial Data
 #----------------------------------------------------------------------------#
 def create_table():
+    
+    #log.gravar('Criando o banco de dados')
+
     db = sqlite3.connect('anti_covid.db')
     cursor = db.cursor()
     
@@ -37,15 +42,19 @@ def create_table():
     )
 
     for c in commands:
+        #log.gravar('Comando executado: ', c)
         cursor.execute(c)
         
-    print('Tables created!')
+    #log.gravar('Tabelas Criadas!')
     initial_data()
     db.close()
 
 
 
 def initial_data():
+
+    #log.gravar('Iniciando o Banco...')
+
     db = sqlite3.connect('anti_covid.db')
     cursor = db.cursor()
     
@@ -55,9 +64,12 @@ def initial_data():
     )
 
     for command in commands:
+        #log.gravar('Comando executado: ', command)
         cursor.execute(command)
         db.commit()
-    print('Initial data created!')    
+
+    #log.gravar('Banco de dados, Ok!')        
+
 
 
 def initial_centers():
@@ -99,7 +111,6 @@ def initial_supply_stores():
     )
 
     return comandos
-
 
 #----------------------------------------------------------------------------#
 # Launch

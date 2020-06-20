@@ -5,6 +5,7 @@
 #----------------------------------------------------------------------------#
 
 from flask import abort, flash, Flask, render_template, redirect, request, url_for
+from flask_paginate import Pagination, get_page_parameter
 
 from db.tables import *
 from db.sql import *
@@ -20,14 +21,22 @@ app = Flask(__name__)
 #----------------------------------------------------------------------------#
 # Controllers
 #----------------------------------------------------------------------------#
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
     r = requests.get('https://brasil.io/api/dataset/covid19/boletim/data/?format=json')
     
     if r.status_code == 200:
         reddit_data = json.loads(r.content)
 
-    return render_template('pages/home.html', informacoes=reddit_data['results'])
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    pagination = Pagination(page=page, total=len(reddit_data['results']), search=search)
+
+    return render_template('pages/home.html', informacoes=reddit_data['results'], pagination=pagination)
 
 @app.route("/suprimentos")
 def suprimentos():
