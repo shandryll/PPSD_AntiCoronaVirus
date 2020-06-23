@@ -4,7 +4,6 @@
 #from ..server.log import log
 import sqlite3
 
-
 #----------------------------------------------------------------------------#
 # Initial Data
 #----------------------------------------------------------------------------#
@@ -17,6 +16,14 @@ def create_table():
     
     commands = (
     
+        """ 
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                address TEXT
+            )
+        """,
+
         """ 
             CREATE TABLE IF NOT EXISTS health_centers (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,6 +43,15 @@ def create_table():
                 address TEXT,
                 site TEXT,
                 available_supplies TEXT
+            )
+        
+        """,
+
+        """ 
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                quantity TEXT
             )
         
         """,

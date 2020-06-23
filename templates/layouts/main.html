@@ -20,8 +20,9 @@
 
         <ul class="nav navbar-nav">
           <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('home') }}">Início</a></li>
-          <li {% if request.endpoint == 'suprimentos' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('suprimentos') }}">Suprimentos</a></li>
+          <li {% if request.endpoint == 'suprimentos' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('suprimentos') }}">Suprimentos Médicos</a></li>
           <li {% if request.endpoint == 'centros_saude' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('centros') }}">Centros de Saúde</a></li>
+          <li {% if request.endpoint == 'boletim' %} class="active" {% endif %}><a class="nav-link" href="{{ url_for('boletim') }}">Boletim</a></li>
         </ul>
 
       </div>
