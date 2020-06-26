@@ -26,12 +26,12 @@
   $ python app.py
   ```
   
-6. Leave docker container:
-  ```
-  $ docker-compose down
-  ```
-
-7. Navigate to:
+6. Navigate to:
   ```
   http://localhost:5000
+  ```
+  
+7. Leave docker container:
+  ```
+  $ docker-compose down
   ```
