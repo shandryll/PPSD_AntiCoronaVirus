@@ -1,0 +1,9 @@
+version: "3.6"
+
+services:
+    app:
+        build: .
+        container_name: app
+        ports:
+            - "6666:7777"
+        image: anticoronavirus_image
