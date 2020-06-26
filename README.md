@@ -16,17 +16,22 @@
   $ docker run anticoronavirus
   ```
   
-4. Verify if exists a container:
+4. Start docker-compose:
   ```
-  $ docker ps
+  $ docker-compose build
   ```
   
-5. Run the development server:
+5. Run container:
+  ```
+  $ docker-compose up -d
+  ```
+  
+6. Run the development server:
   ```
   $ python app.py
   ```
 
-6. Navigate to:
+7. Navigate to:
   ```
   http://localhost:5000
   ```
