@@ -15,6 +15,7 @@ from db.tables import *
 from db.sql import *
 from db.users import *
 from db.centers import *
+from server.log import *
 
 import json
 import requests
@@ -37,6 +38,7 @@ data = data_e_hora_atuais.strftime('%Y%m%d')
 d = data_anterior.strftime("%Y%m%d")
 data_formatada = data_e_hora_atuais.strftime('%d/%m/%Y')
 
+session = None
 
 #----------------------------------------------------------------------------#
 # Controllers
@@ -48,7 +50,7 @@ def home():
 
     r = requests.get(api)
 
-    print('\nLink da API: ', api)
+    gravar('Link da API: '+api)
     
     dados = []
 
@@ -63,7 +65,9 @@ def home():
         
         if(len(reddit_data['data']) == 0):
             api = 'https://covid19-brazil-api.now.sh/api/report/v1/brazil/'+d+'?format=json'
-
+            
+            gravar('Link da API: '+ api)
+            
             r = requests.get(api)
 
             if r.status_code == 200:
@@ -118,7 +122,7 @@ def boletim():
 
 @app.route("/check_my_situation", methods=['GET', 'POST'])
 def matriz():
-
+    
     if request.method == 'GET':
         return render_template('forms/cadastro.html')
 
@@ -130,47 +134,42 @@ def matriz():
         user_covid = request.form["covid"]
         user_prevention = request.form["prevencao"]
 
-        print(
-            '\nNome: ', user_name,
-            '\nEndereco: ', user_addres,
-            '\nRegiao: ', user_region,
-            '\nConvive com alguem infectado? ', user_covid,
-            '\nSegue o padrão de prevenção? ', user_prevention
+        gravar(
+            'Dados informados pelo usuario: '+
+            '\n\tNome: ' + user_name+
+            '\n\tEndereco: ' + user_addres+
+            '\n\tRegiao: '+ user_region+
+            '\n\tConvive com alguem infectado? '+ user_covid+
+            '\n\tSegue o padrão de prevenção? '+ user_prevention
         )
 
         data = [user_name, user_addres, user_region, user_covid, user_prevention]
         user = verify_user(data)
         
-        if user == []:
-            print('\nInserindo usuario')
+        if user == [] and session == None:
+            gravar('Inserindo usuario')
 
             insert_user(data)
-
-            return redirect(url_for('home'))
+            user = verify_situation_user(data)
+           # session = user
+            return render_template('pages/my_situation.html', data = user)
 
         else:
-            print('\nVerificando a situação do usuario ')
+            gravar('Verificando a situação do usuario ')
 
             user = verify_situation_user(data)
 
             for i in user:
-                print('\nUser: ', i)
+                gravar('Dados do User: '+ i)
 
             return render_template('pages/my_situation.html', data = user)
-
-
-# URL para verificar se o Usuario está infectado com o Covid
-@app.route('/my_situation', methods=['GET', 'POST'])
-def my_situation():            
-    
-
-    return render_template('pages/my_situation.html', data=user)
 
 
 
 @app.route('/centros', methods=['GET', 'POST'])
 def centros():
-    
+    gravar('Buscandos todos os dados de centros medicos')
+
     data = all_centers()
 
     return render_template('pages/centros_medicos.html', data=data)

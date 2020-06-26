@@ -1,8 +1,10 @@
 #----------------------------------------------------------------------------#
 # Imports
 #----------------------------------------------------------------------------#
-#from ..server.log import log
+
 import sqlite3
+
+
 #from centers import *
 #import users
 
@@ -67,7 +69,7 @@ def create_table():
         #log.gravar('Comando executado: ', c)
         cursor.execute(c)
         
-    #log.gravar('Tabelas Criadas!')
+    gravar('Tabelas Criadas!')
     initial_data()
     db.close()
 
