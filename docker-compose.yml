@@ -5,5 +5,5 @@ services:
         build: .
         container_name: app
         ports:
-            - "6666:7777"
-        image: anticoronavirus_image
+            - "5000:5000"
+        image: anticoronavirus

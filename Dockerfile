@@ -6,16 +6,12 @@ RUN apt-get -y update
 
 RUN apt-get install -y tzdata
 
-RUN apt-get install -y apt-utils python3-pip build-essential
-
-RUN cd /usr/local/bin \
-  && ln -s /usr/bin/python3 python \
-  && pip3 install --upgrade pip
+RUN apt-get install -y apt-utils python-pip python-dev
 
 COPY . .
 
-RUN python3 -m pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-CMD ["python3", "app.py"]
+ENTRYPOINT [ "python" ]
 
-EXPOSE 80
+CMD [ "app.py" ]
