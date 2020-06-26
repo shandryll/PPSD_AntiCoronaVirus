@@ -6,14 +6,24 @@
   $ cd PPSD_AntiCoronaVirus
   ```
 
-2. Install the dependencies:
+2. Create an Docker image:
   ```
-  $ pip install -r requirements.txt
+  $ docker build -t anticoronavirus .
   ```
 
-3. Run the development server:
+3. Create a Docker container:
+  ```
+  $ docker run anticoronavirus
+  ```
+  
+4. Verify if exists a container:
+  ```
+  $ docker ps
+  ```
+  
+5. Run the development server:
   ```
   $ python app.py
   ```
 
-4. Navigate to [http://localhost:5000](http://localhost:5000)
+6. Navigate to [http://localhost:5000]
