@@ -6,29 +6,29 @@
   $ cd PPSD_AntiCoronaVirus
   ```
 
-2. Create an Docker image:
-  ```
-  $ docker build -t anticoronavirus .
-  ```
-
-3. Create a Docker container:
-  ```
-  $ docker run anticoronavirus
-  ```
-  
-4. Start docker-compose:
+2. Create a docker container:
   ```
   $ docker-compose build
   ```
   
-5. Run container:
+3. Start docker container:
   ```
   $ docker-compose up -d
   ```
   
-6. Run the development server:
+4. Enter in docker container:
+  ```
+  $ docker exec -it anticoronavirus /bin/bash
+  ```
+  
+5. Run the development server:
   ```
   $ python app.py
+  ```
+  
+6. Leave docker container:
+  ```
+  $ docker-compose down
   ```
 
 7. Navigate to:
