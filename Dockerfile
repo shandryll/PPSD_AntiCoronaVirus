@@ -16,4 +16,4 @@ COPY . .
 
 RUN python3 -m pip install -r requirements.txt
 
-CMD tail -f /dev/null
+EXPOSE 7777
