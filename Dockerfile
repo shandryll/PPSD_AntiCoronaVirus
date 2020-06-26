@@ -16,4 +16,6 @@ COPY . .
 
 RUN python3 -m pip install -r requirements.txt
 
-EXPOSE 7777
+CMD ["python3", "app.py"]
+
+EXPOSE 80
