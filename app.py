@@ -8,14 +8,13 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 
-from flask import abort, flash, Flask, render_template, redirect, request, url_for
+from flask import abort, flash, Flask, render_template, redirect, request, url_for, session
 #from flask_paginate import Pagination, get_page_parameter, get_page_args
-from logging.config import fileConfig
-import logging
-
 
 from db.tables import *
 from db.sql import *
+from db.users import *
+from db.centers import *
 
 import json
 import requests
@@ -35,7 +34,7 @@ app = Flask(__name__)
 data_e_hora_atuais = datetime.datetime.now()
 data_anterior = data_e_hora_atuais - datetime.timedelta(days=1)
 data = data_e_hora_atuais.strftime('%Y%m%d')
-d = data_anterior.strftime("%Y-%m-%d")
+d = data_anterior.strftime("%Y%m%d")
 data_formatada = data_e_hora_atuais.strftime('%d/%m/%Y')
 
 
@@ -44,20 +43,32 @@ data_formatada = data_e_hora_atuais.strftime('%d/%m/%Y')
 #----------------------------------------------------------------------------#
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    #app.logger.warning('A warning occurred (%d apples)', 42)
-    #app.logger.error('An error occurred')
-    #app.logger.info('ops')
 
     api = 'https://covid19-brazil-api.now.sh/api/report/v1/brazil/'+data+'?format=json'
 
     r = requests.get(api)
 
-    print(api)
+    print('\nLink da API: ', api)
     
     dados = []
 
     if r.status_code == 200:
         reddit_data = json.loads(r.content)
+        
+        '''
+            * Condicional verificando o tamanho do retorno do conteudo
+            * que busca informações do dia atual, caso não possua nenhum
+            * dado, ele busca o do dia anterior
+        '''
+        
+        if(len(reddit_data['data']) == 0):
+            api = 'https://covid19-brazil-api.now.sh/api/report/v1/brazil/'+d+'?format=json'
+
+            r = requests.get(api)
+
+            if r.status_code == 200:
+                reddit_data = json.loads(r.content)
+
 
     for i in reddit_data['data']:
         dados.append(i)
@@ -83,6 +94,7 @@ def boletim():
 
     data = datetime.datetime.now()
     data_formatado = data.strftime('%Y-%m-%d')
+    d = data_anterior.strftime("%Y-%m-%d")
 
     informacoes = []
 
@@ -93,7 +105,7 @@ def boletim():
 
     # Obter as informacoes dos boletins do dia atual
     for info in reddit_data['results']:
-        if info['date'] == data_formatado:
+        if info['date'] == d:
             informacoes.append(info)
 
     search = False
@@ -104,10 +116,55 @@ def boletim():
     return render_template('pages/boletim.html', informacoes=informacoes)
 
 
-@app.route("/matriz")
+@app.route("/check_my_situation", methods=['GET', 'POST'])
 def matriz():
 
-    return render_template('forms/matriz.html', data=data)
+    if request.method == 'GET':
+        return render_template('forms/cadastro.html')
+
+    elif request.method == 'POST':
+        
+        user_name = request.form["name"]
+        user_addres = request.form["endereco"]
+        user_region = request.form["regiao"]
+        user_covid = request.form["covid"]
+        user_prevention = request.form["prevencao"]
+
+        print(
+            '\nNome: ', user_name,
+            '\nEndereco: ', user_addres,
+            '\nRegiao: ', user_region,
+            '\nConvive com alguem infectado? ', user_covid,
+            '\nSegue o padrão de prevenção? ', user_prevention
+        )
+
+        data = [user_name, user_addres, user_region, user_covid, user_prevention]
+        user = verify_user(data)
+        
+        if user == []:
+            print('\nInserindo usuario')
+
+            insert_user(data)
+
+            return redirect(url_for('home'))
+
+        else:
+            print('\nVerificando a situação do usuario ')
+
+            user = verify_situation_user(data)
+
+            for i in user:
+                print('\nUser: ', i)
+
+            return render_template('pages/my_situation.html', data = user)
+
+
+# URL para verificar se o Usuario está infectado com o Covid
+@app.route('/my_situation', methods=['GET', 'POST'])
+def my_situation():            
+    
+
+    return render_template('pages/my_situation.html', data=user)
 
 
 

@@ -3,6 +3,8 @@
 #----------------------------------------------------------------------------#
 #from ..server.log import log
 import sqlite3
+#from centers import *
+#import users
 
 #----------------------------------------------------------------------------#
 # Initial Data
@@ -15,12 +17,16 @@ def create_table():
     cursor = db.cursor()
     
     commands = (
-    
+        
         """ 
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
-                address TEXT
+                address TEXT,
+                region TEXT,
+                coexists_covid_person TEXT,
+                Im_infected TEXT,
+                prevention TEXT
             )
         """,
 
@@ -86,8 +92,6 @@ def initial_data():
 
     #log.gravar('Banco de dados, Ok!')        
 
-
-
 def initial_centers():
     comandos = (
         
@@ -95,7 +99,11 @@ def initial_centers():
             INSERT INTO health_centers (name, opening_hours, address, phone, test_available) 
             
             VALUES (
-                'Teste1', 'xxxx', 'teste', '31 999999', 'sim'
+                'Centro de Saúde Bairro das Indústrias', 
+                '7 às 19h', 
+                'Rua Maria de Loudes Manso, 80, Bairro das Indústrias', 
+                '3277-5978 | 3277-5899', 
+                'Não'
             )
 
         """,
@@ -104,14 +112,17 @@ def initial_centers():
             INSERT INTO health_centers (name, opening_hours, address, phone, test_available) 
             
             VALUES (
-                'Teste2', 'sdsdfxxxx', 'teste2', '(31) 9222222','daddsfsdfsdsr'
+                'Centro de Saúde Bonsucesso', 
+                '7 às 19h', 
+                'Av. Dr. Cristiano Machado Resende, 1875', 
+                '3277-9069 | 3277-9132',
+                'Não'
             )
 
         """,
     )
 
     return comandos
-
     
 def initial_supply_stores():
     comandos = (

@@ -12,10 +12,12 @@
                 <div class="card">
 
                 <p class="card_text">Data: <span>{{ boletim['date'] }}</span></p>
-                <p class="card_text">UF/Link para Boletim:: <span>{{ boletim['state'] }}</span></p>
+                
+                <p class="card_text">UF/Link para Boletim: 
+                    <a href="{{ boletim['url'] }}"><span>{{ boletim['state'] }}</span></a>
+                </p>
+                
                 <p class="card_text">Observação: <span>{{ boletim['notes'] }}</span></p>
-                <p class="card_text">Link: <span>{{ boletim['url'] }}</span></p>
-
                 </div>
             </div>
             </div>

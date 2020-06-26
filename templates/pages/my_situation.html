@@ -1,0 +1,39 @@
+
+{% extends 'layouts/main.html' %}
+{% block title %}Minha Situação Contra Covid{% endblock %}
+
+{% block content %}
+
+    Pagina responsavel por medir, a probabilidade do usuario estar com a doença ou não.<br/><br/>
+
+        {% for info in data %}
+            <div class="row">
+            <div class="col-md-12 column">
+                <div class="card">
+
+                <p class="card_text">Região: <span>{{ info[0] }}</span></p>
+                
+                <p class="card_text">Vive com alguma pessoa com a doença: 
+                    <span>{{ info[1] }}</span>
+                </p>
+                
+                <p class="card_text">Você se previni contra a doença:<span>{{ info[2] }}</span></p>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        
+
+        <br><br><br>
+        Comentario do Jeff:
+
+        Se for do barreiro ou da pampulha só lamento,
+
+        mas a logica daqui é ter mais uma tabela do banco, com valores ficticios de cada região,
+        tipo em porcentagem de como está a doença em cada uma delas e com os parametros passados
+        pelo usuario se ele vem seguindo as regras de prevenção e tals, gerar uma probabilidade,
+        e dependendo do resultado alterar na tabela users, se ele está infectado ou não. 
+
+{% endblock %}
+
+

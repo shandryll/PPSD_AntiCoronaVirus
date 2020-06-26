@@ -1,0 +1,78 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Minha Situação{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid loglife_title">
+    <form action ="#" method="post" class="form">
+      <div class="page-header">
+
+        <h2 class="form-heading">Cadastro Usuario</h2>
+
+        <div class="form-row">
+          Antes de poder aproveitar das informações em nosso sistema, precisamos que você 
+          se cadastre para a melhor aproveitamento.   <br><br>      
+        </div>
+
+
+        <div class="form-row">
+          
+          <div class="form-group col-md-6">
+            <label for="name">Seu Nome</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group col-md-6">
+            <label for="endereco">Seu Endereço</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+          </div>
+          
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="regiao">Região</label>
+            <select class="form-control" id="regiao" name="regiao" required>
+              <option></option>
+              <option>Barreiro</option>
+              <option>Centro-Sul</option>
+              <option>Leste</option>
+              <option>Nordeste</option>
+              <option>Noroeste</option>
+              <option>Norte</option>
+              <option>Oeste</option>
+              <option>Pampulha</option>
+              <option>Venda Nova</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="covid">Vive com alguém com COVID?</label>
+            <select class="form-control" id="covid" name="covid" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="prevencao">Segue os procedimentos de prevenção?</label>
+            <select class="form-control" id="prevencao" name="prevencao" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="submit" value="Verificar" class="btn btn-primary btn-lg btn-block">
+
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

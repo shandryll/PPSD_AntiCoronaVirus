@@ -7,7 +7,7 @@
     <div class="page-header">
 
       <h2>Centros de Saude</h2>
-      <p class="subtitle">Visualize serviços disponíveis.</p>
+      <p class="subtitle">Visualize os centros disponíveis.</p>
       </br>
 
       {% if data %}
@@ -17,11 +17,11 @@
             <div class="col-md-12 column">
               <div class="card">
 
-                <p class="card_text">Número do pedido: <span>{{ row[0] }}</span></p>
-                <p class="card_text">Nome do Remetente: <span>{{ row[1] }}</span></p>
-                <p class="card_text">Endereço do Remetente: <span>{{ row[2] }}</span></p>
-                <p class="card_text">Nome do Destinatário: <span>{{ row[3] }}</span></p>
-                <p class="card_text">Endereço do Destinatário: <span>{{ row[4] }}</span></p>
+                <p class="card_text">Nome do Centro: <span>{{ row[1] }}</span></p>
+                <p class="card_text">Horário de Funcionamento: <span>{{ row[2] }}</span></p>
+                <p class="card_text">Endereço: <span>{{ row[3] }}</span></p>
+                <p class="card_text">Telefone: <span>{{ row[4] }}</span></p>
+                <p class="card_text">Possui Teste Disponivel? : <span>{{ row[5] }}</span></p>
 
               </div>
             </div>
