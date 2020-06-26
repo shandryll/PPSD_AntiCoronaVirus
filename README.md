@@ -26,4 +26,7 @@
   $ python app.py
   ```
 
-6. Navigate to [http://localhost:5000]
+6. Navigate to:
+  ```
+  http://localhost:5000
+  ```
