@@ -16,22 +16,12 @@
   $ docker-compose up -d
   ```
   
-4. Enter in docker container:
-  ```
-  $ docker exec -it anticoronavirus /bin/bash
-  ```
-  
-5. Run the development server:
-  ```
-  $ python app.py
-  ```
-  
-6. Navigate to:
+4. Navigate to:
   ```
   http://localhost:5000
   ```
   
-7. Leave docker container:
+5. Leave docker container:
   ```
   $ docker-compose down
   ```
