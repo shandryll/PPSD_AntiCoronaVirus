@@ -1,0 +1,40 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Lojas que vendem Suprimentos{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid loglife_title">
+    <div class="page-header">
+
+      <h2>Lojas que vendem Suprimentos</h2>
+      <p class="subtitle">Visualize serviços disponíveis.</p>
+      </br>
+
+      {% if data %}
+
+        {% for row in data %}
+          <div class="row">
+            <div class="col-md-12 column">
+              <div class="card">
+
+                <p class="card_text">Nome da Loja: <span>{{ row[1] }}</span></p>
+                <p class="card_text">Endereço: <span>{{ row[2] }}</span></p>
+                <p class="card_text">Site: <span>{{ row[3] }}</span></p>
+                <p class="card_text">Suprimentos Disponíveis: <span>{{ row[4] }}</span></p>
+                <p class="card_text">Preço: <span>{{ row[5] }}</span></p>
+                <p class="card_text">Quantidade no Estoque: <span>{{ row[6] }}</span></p>
+
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      {% else %}
+      </br>
+      <p class="lead" style="text-align: center;">Sem serviços disponíveis.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

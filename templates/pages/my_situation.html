@@ -1,0 +1,58 @@
+
+{% extends 'layouts/main.html' %}
+{% block title %}Minha Situação Contra Covid{% endblock %}
+
+{% block content %}
+
+    Pagina responsavel por medir, a probabilidade do usuario estar com a doença ou não.<br/><br/>
+
+        {% for info in data %}
+            <div class="row">
+            <div class="col-md-12 column">
+                <div class="card">
+                
+                <p class="card_text">Vive com alguém diagnosticado com COVID? : 
+                    <span>{{ info[4] }}</span>
+                </p>
+                
+                <p class="card_text">Segue o Distanciamento Social : 
+                    <span>{{ info[5] }}</span>
+                </p>
+
+                <p class="card_text">Você sai de casa sem a mascara : 
+                    <span>{{ info[6] }}</span>
+                </p>
+
+                <p class="card_text">Você higieniza a sua mão com frequencia : 
+                    <span>{{ info[7] }}</span>
+                </p>
+
+                <p class="card_text">Você está infectado? : 
+                    <span>{{ info[8] }}</span>
+                </p>
+            </div>
+            </div>
+        {% endfor %}
+        
+
+        <br><br><br>
+        Apuração:
+
+            <p>
+                Verificamos os primeiros 4 campos, que você respondeu para  
+                concluirmos se está ou não infectado pela doença.
+            </p>
+        
+            <p>
+                Observação:
+
+                Vale ressaltar que a nossa apuração de você estar ou não infectado,
+                não é com 100% de certeza, para tal, deve-se procurar algum centro médico
+                que esteja realizando os testes contra a doença, além disso, só procure o 
+                atendimento médico caso esteja com sintomas parecidos da doença. 
+
+            </p>
+
+{% endblock %}
+
+

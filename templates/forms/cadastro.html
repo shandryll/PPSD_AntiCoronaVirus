@@ -1,0 +1,96 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Minha Situação{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid loglife_title">
+    <form action ="#" method="post" class="form">
+      <div class="page-header">
+
+        <h2 class="form-heading">Cadastro Usuario</h2>
+
+        <div class="form-row">
+          Antes de poder aproveitar das informações em nosso sistema, precisamos que você 
+          se cadastre para a melhor aproveitamento.   <br><br>      
+        </div>
+
+
+        <div class="form-row">
+          
+          <div class="form-group col-md-6">
+            <label for="name">Seu Nome</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group col-md-6">
+            <label for="endereco">Seu Endereço</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+          </div>
+          
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="uf">UF</label>
+            <select class="form-control" id="uf" name="uf" required>
+              <option></option>
+              <option>MG</option>
+              <option>RJ</option>
+              <option>SP</option>
+              <option>CE</option>
+              <option>DF</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="covid">Vive com alguém com COVID?</label>
+            <select class="form-control" id="covid" name="covid" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="distanciamento">Segue o Distanciamento Social?</label>
+            <select class="form-control" id="distanciamento" name="distanciamento" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="sem_mascara">Você sai de casa sem a mascara?</label>
+            <select class="form-control" id="sem_mascara" name="sem_mascara" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="higiene_mao">Você higieniza a sua mão com frequencia?</label>
+            <select class="form-control" id="higiene_mao" name="higiene_mao" required>
+              <option></option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="submit" value="Verificar" class="btn btn-primary btn-lg btn-block">
+
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
