@@ -80,8 +80,22 @@ def initial_data():
         
 
 def initial_centers():
+    
     comandos = (
         
+         """
+            INSERT INTO health_centers (name, opening_hours, address, phone, test_available) 
+            
+            VALUES (
+                'Centro de Saúde Teste', 
+                '8 às 16h', 
+                'Rua Teste, n°08 , xxxxx-xxx', 
+                '3277-9069 | 3277-9132',
+                'Sim'
+            )
+
+        """,
+
         """
             INSERT INTO health_centers (name, opening_hours, address, phone, test_available) 
             
