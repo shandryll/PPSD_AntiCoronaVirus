@@ -5,9 +5,6 @@
 import sqlite3
 
 
-#from centers import *
-#import users
-
 #----------------------------------------------------------------------------#
 # Initial Data
 #----------------------------------------------------------------------------#
@@ -51,7 +48,8 @@ def create_table():
                 address TEXT,
                 site TEXT,
                 available_supplies TEXT,
-                quantity INTEGER
+                price TEXT,
+                stock_quantity INTEGER
             )
         
         """,
@@ -67,8 +65,6 @@ def create_table():
 
 
 def initial_data():
-
-    #log.gravar('Iniciando o Banco...')
 
     db = sqlite3.connect('anti_covid.db')
     cursor = db.cursor()
@@ -119,10 +115,57 @@ def initial_supply_stores():
     comandos = (
 
         """
-            INSERT INTO supply_stores (name, address, site, available_supplies) 
+            INSERT INTO supply_stores (name, address, site, available_supplies, price, stock_quantity) 
             
             VALUES (
-                'Loja de Suprmentos 1', 'teste', 'http://teste', 'alcool em gel'
+                'Loja de Suprimentos 1', 
+                'Rua Teste1, n°01, xxxxx-xxx', 
+                'https://teste1.com.br', 
+                'Alcool em gel',
+                'R$ 10.00',
+                50
+            )
+
+        """,
+
+        """
+            INSERT INTO supply_stores (name, address, site, available_supplies, price, stock_quantity) 
+            
+            VALUES (
+                'Loja de Suprimentos 2', 
+                'Rua Teste2, n°02, xxxxx-xxx', 
+                'https://teste2.com.br', 
+                'Alcool em gel',
+                'R$ 8.00',
+                10
+            )
+
+        """,
+
+        """
+            INSERT INTO supply_stores (name, address, site, available_supplies, price, stock_quantity) 
+            
+            VALUES (
+                'Loja de Suprimentos 1', 
+                'Rua Teste1, n°01, xxxxx-xxx', 
+                'https://teste1.com.br', 
+                'Mascara',
+                'R$ 5.00',
+                20
+            )
+
+        """,
+
+        """
+            INSERT INTO supply_stores (name, address, site, available_supplies, price, stock_quantity) 
+            
+            VALUES (
+                'Loja de Suprimentos 2', 
+                'Rua Teste2, n°02, xxxxx-xxx', 
+                'https://teste2.com.br', 
+                'Mascara',
+                'R$ 4.00',
+                12
             )
 
         """,

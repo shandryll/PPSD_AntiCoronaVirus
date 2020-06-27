@@ -103,7 +103,7 @@ def check_user(data, name):
 
     if verify_im_infected(detachment, without_mask, hand_hygiene) == "Sim":
         print('aki')
-        data = update_infected_user(data, name)
+        update_infected_user(data, name)
 
     return data                     
 
