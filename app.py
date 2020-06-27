@@ -86,6 +86,8 @@ def home():
 
     return render_template('pages/home.html', data_atual = data_formatada, informacoes = informacoes)
 
+
+# Lista as lojas com os produtos que ajuda a combater a doença
 @app.route("/suprimentos")
 def suprimentos():
     data = all_supply_stores()
@@ -93,6 +95,7 @@ def suprimentos():
     return render_template('pages/suprimentos.html', data=data)
 
 
+# Busca dados de cada estado, esses dados obtidas por uma API
 @app.route("/boletim")
 def boletim():
 
@@ -130,10 +133,13 @@ def matriz():
         
         user_name = request.form["name"]
         user_addres = request.form["endereco"]
-        user_region = request.form["regiao"]
+        user_region = request.form["uf"]
         user_covid = request.form["covid"]
-        user_prevention = request.form["prevencao"]
+        user_prevention = request.form["distanciamento"]
+        user_mask = request.form["sem_mascara"]
+        user_higiene = request.form["higiene_mao"]
 
+        # Para imprimir no console, ajuda para a realização de testes
         gravar(
             'Dados informados pelo usuario: '+
             '\n\tNome: ' + user_name+
@@ -143,26 +149,26 @@ def matriz():
             '\n\tSegue o padrão de prevenção? '+ user_prevention
         )
 
-        data = [user_name, user_addres, user_region, user_covid, user_prevention]
+        data = [
+            user_name, user_addres, 
+            user_region, user_covid, 
+            user_prevention, user_mask,
+            user_higiene
+        ]
+        
         user = verify_user(data)
         
         if user == [] and session == None:
             gravar('Inserindo usuario')
 
             insert_user(data)
-            user = verify_situation_user(data)
-           # session = user
-            return render_template('pages/my_situation.html', data = user)
 
-        else:
-            gravar('Verificando a situação do usuario ')
 
-            user = verify_situation_user(data)
+        # Obtendo as informações necessarias para falar se o usuario esta com covid 
+            #user = verify_situation_user(data)
+        check_user(user)
 
-            for i in user:
-                gravar('Dados do User: '+ i)
-
-            return render_template('pages/my_situation.html', data = user)
+        return render_template('pages/my_situation.html', data = user)
 
 
 

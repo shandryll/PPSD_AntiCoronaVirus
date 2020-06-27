@@ -12,8 +12,6 @@ import sqlite3
 # Initial Data
 #----------------------------------------------------------------------------#
 def create_table():
-    
-    #log.gravar('Criando o banco de dados')
 
     db = sqlite3.connect('anti_covid.db')
     cursor = db.cursor()
@@ -25,10 +23,12 @@ def create_table():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
                 address TEXT,
-                region TEXT,
+                uf TEXT,
                 coexists_covid_person TEXT,
-                Im_infected TEXT,
-                prevention TEXT
+                detachment TEXT,
+                without_mask TEXT,
+                hand_hygiene TEXT,
+                Im_infected TEXT
             )
         """,
 
@@ -50,26 +50,17 @@ def create_table():
                 name TEXT,
                 address TEXT,
                 site TEXT,
-                available_supplies TEXT
-            )
-        
-        """,
-
-        """ 
-            CREATE TABLE IF NOT EXISTS products (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT,
-                quantity TEXT
+                available_supplies TEXT,
+                quantity INTEGER
             )
         
         """,
     )
 
     for c in commands:
-        #log.gravar('Comando executado: ', c)
         cursor.execute(c)
         
-    gravar('Tabelas Criadas!')
+    print('Tabelas Criadas!')
     initial_data()
     db.close()
 
@@ -88,11 +79,9 @@ def initial_data():
     )
 
     for command in commands:
-        #log.gravar('Comando executado: ', command)
         cursor.execute(command)
         db.commit()
-
-    #log.gravar('Banco de dados, Ok!')        
+        
 
 def initial_centers():
     comandos = (
