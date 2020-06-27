@@ -4,14 +4,8 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-import logging
-from logging.handlers import RotatingFileHandler
-
-
 from flask import abort, flash, Flask, render_template, redirect, request, url_for, session
-#from flask_paginate import Pagination, get_page_parameter, get_page_args
 
-from db.tables import *
 from db.sql import *
 from db.users import *
 from db.centers import *
@@ -158,27 +152,34 @@ def matriz():
         
         user = verify_user(data)
         
-        if user == [] and session == None:
-            gravar('Inserindo usuario')
-
+        if user == []:
+            gravar('Inserindo novo Usuario')
+            
             insert_user(data)
+            
+            user = verify_user(data)
+            
+            return render_template('pages/my_situation.html', data = user)    
 
+        else:
+            gravar('Usuario existente no banco, verificando o status')
+            
+            verify_situation_user(data)
+    
 
-        # Obtendo as informações necessarias para falar se o usuario esta com covid 
-            #user = verify_situation_user(data)
-        check_user(user)
+            return render_template('pages/my_situation.html', data = user)
 
-        return render_template('pages/my_situation.html', data = user)
+        
 
 
 
 @app.route('/centros', methods=['GET', 'POST'])
 def centros():
+
     gravar('Buscandos todos os dados de centros medicos')
-
     data = all_centers()
-
     return render_template('pages/centros_medicos.html', data=data)
+
 
 #----------------------------------------------------------------------------#
 # Launch

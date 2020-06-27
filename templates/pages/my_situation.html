@@ -10,29 +10,48 @@
             <div class="row">
             <div class="col-md-12 column">
                 <div class="card">
-
-                <p class="card_text">UF: <span>{{ info[0] }}</span></p>
                 
-                <p class="card_text">Vive com alguma pessoa com a doença: 
-                    <span>{{ info[1] }}</span>
+                <p class="card_text">Vive com alguém diagnosticado com COVID? : 
+                    <span>{{ info[4] }}</span>
                 </p>
                 
-                <p class="card_text">Você se previni contra a doença:<span>{{ info[2] }}</span></p>
-                </div>
+                <p class="card_text">Segue o Distanciamento Social : 
+                    <span>{{ info[5] }}</span>
+                </p>
+
+                <p class="card_text">Você sai de casa sem a mascara : 
+                    <span>{{ info[6] }}</span>
+                </p>
+
+                <p class="card_text">Você higieniza a sua mão com frequencia : 
+                    <span>{{ info[7] }}</span>
+                </p>
+
+                <p class="card_text">Você está infectado? : 
+                    <span>{{ info[8] }}</span>
+                </p>
             </div>
             </div>
         {% endfor %}
         
 
         <br><br><br>
-        Comentario do Jeff:
+        Apuração:
 
-        Se for do barreiro ou da pampulha só lamento,
+            <p>
+                Verificamos os primeiros 4 campos, que você respondeu para  
+                concluirmos se está ou não infectado pela doença.
+            </p>
+        
+            <p>
+                Observação:
 
-        mas a logica daqui é ter mais uma tabela do banco, com valores ficticios de cada região,
-        tipo em porcentagem de como está a doença em cada uma delas e com os parametros passados
-        pelo usuario se ele vem seguindo as regras de prevenção e tals, gerar uma probabilidade,
-        e dependendo do resultado alterar na tabela users, se ele está infectado ou não. 
+                Vale ressaltar que a nossa apuração de você estar ou não infectado,
+                não é com 100% de certeza, para tal, deve-se procurar algum centro médico
+                que esteja realizando os testes contra a doença, além disso, só procure o 
+                atendimento médico caso esteja com sintomas parecidos da doença. 
+
+            </p>
 
 {% endblock %}
 

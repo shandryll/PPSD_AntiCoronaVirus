@@ -6,10 +6,9 @@ def verify_user(data):
     cursor = db.cursor()
     
     user_name = data[0]
-    user_addres = data[1]
-    user_region = data[2]
+    print('Verificando o cadasto do Usuario: ', user_name)
 
-    cursor.execute(f'SELECT * FROM users WHERE name = "{user_name}" AND uf = "{user_region}"')
+    cursor.execute(f'SELECT * FROM users WHERE name = "{user_name}" ')
     
     data = cursor.fetchall()
     db.close()
@@ -31,8 +30,7 @@ def insert_user(data):
     without_mask = data[5]
     hand_hygiene = data[6]
     
-    # Por default será inserido que ele não está infectado pela covid
-    Im_infected = "Não"  
+    im_infected = verify_im_infected(detachment, without_mask, hand_hygiene)  
 
     cursor.execute(f"""
         INSERT INTO users (name, address, uf, coexists_covid_person, detachment,
@@ -46,7 +44,7 @@ def insert_user(data):
                 "{detachment}",
                 "{without_mask}",
                 "{hand_hygiene}",
-                "{Im_infected}"
+                "{im_infected}"
             )
         """
     )
@@ -61,41 +59,58 @@ def verify_situation_user(data):
     cursor = db.cursor()
     
     user_name = data[0]
+    print('Usr name: ', user_name)
 
     cursor.execute(
-        f'SELECT uf, coexists_covid_person, detachment, without_mask, hand_hygiene FROM users WHERE name = "{user_name}"'
+        f'SELECT detachment, without_mask, hand_hygiene FROM users WHERE name = "{user_name}"'
     )
     
     data = cursor.fetchall()
-    db.close()
     
-    return data
+    check_user(data, user_name)
+    
+    db.close()
+
 
 
 # Metodo que altera o status do usuario, colocando como infectado
-def update_infected_user(data):
+def update_infected_user(data, name):
     db = sqlite3.connect('anti_covid.db')
     cursor = db.cursor()
     
-    user_name = data[0]
+    user_name = name
+    print('nome: ', user_name)
 
     cursor.execute(
-        f'UPDATE users SET Im_infected = "Sim" FROM users WHERE name = "{user_name}"'
+        f'UPDATE users SET Im_infected = "Sim" WHERE name = "{user_name}"'
     )
     
     db.commit()
-    db.close()
     
-    return data
-
-
-def check_user(data):
     
-    covid = data[3] # Vive com alguém com COVID?
-    detachment = data[4] # Segue o Distanciamento Social?
-    without_mask = data[5] # Você sai de casa sem a mascara?
-    hand_hygiene = data[6] # Você higieniza a sua mão com frequencia?
 
-    if covid == "Sim" and detachment == "Não" and without_mask == "Sim" and hand_hygiene == "Não":        
-        update_infected_user(data)                
 
+def check_user(data, name):
+
+    #covid = data[4] # Vive com alguém diagnosticado com COVID?
+    print(data)
+
+    detachment = data[0][0] # Segue o Distanciamento Social?
+    without_mask = data[0][1] # Você sai de casa sem a mascara?
+    hand_hygiene = data[0][2] # Você higieniza a sua mão com frequencia?
+
+    print('Dist: '+ detachment + " sem mascara: "+ without_mask+ " higiene mao: "+ hand_hygiene)
+
+    if verify_im_infected(detachment, without_mask, hand_hygiene) == "Sim":
+        print('aki')
+        data = update_infected_user(data, name)
+
+    return data                     
+
+
+def verify_im_infected(detachment, without_mask, hand_hygiene):
+    
+    if detachment == "Não" and without_mask == "Sim" and hand_hygiene == "Não":        
+        return "Sim" # Está infectado
+
+    return "Não"
