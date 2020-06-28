@@ -10,18 +10,23 @@
   ```
   $ docker-compose build
   ```
-  
-3. Start docker container:
+
+3. Install database and initial data:
+  ```
+  $ python db/tables.py
+  ```
+
+4. Start docker container:
   ```
   $ docker-compose up -d
   ```
   
-4. Navigate to:
+5. Navigate to:
   ```
   http://localhost:5000
   ```
   
-5. Leave docker container:
+6. Leave docker container:
   ```
   $ docker-compose down
   ```
